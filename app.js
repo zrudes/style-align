@@ -14,19 +14,54 @@
 
   var CLIENT_NAME = getClientName();
 
+  // ── Asset Discovery ──
+
+  var MEDIA_EXTS = ["jpg", "jpeg", "png", "gif", "webp", "avif", "mp4", "webm", "mov"];
+
+  function discoverAssets() {
+    if (CONFIG.assets && CONFIG.assets.length > 0) {
+      return Promise.resolve(CONFIG.assets);
+    }
+    return fetch("_assets/")
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, "text/html");
+        var assets = Array.from(doc.querySelectorAll("a[href]"))
+          .map(function (a) { return a.getAttribute("href"); })
+          .filter(function (href) {
+            var ext = href.split(".").pop().toLowerCase();
+            return MEDIA_EXTS.indexOf(ext) !== -1;
+          });
+        assets.sort(function (a, b) {
+          var na = parseInt(a.replace(/\D+/g, ""), 10);
+          var nb = parseInt(b.replace(/\D+/g, ""), 10);
+          if (!isNaN(na) && !isNaN(nb)) return na - nb;
+          return a.localeCompare(b);
+        });
+        return assets;
+      });
+  }
+
   // ── Render ──
 
   function init() {
     document.getElementById("client-name").textContent = CLIENT_NAME;
     document.getElementById("description").textContent = CONFIG.description;
 
-    readHash();
-    renderGallery();
-
     document.getElementById("btn-submit").addEventListener("click", submitMailto);
     document.getElementById("btn-copy").addEventListener("click", copyURL);
     document.getElementById("btn-download").addEventListener("click", downloadZip);
     document.getElementById("panel-expand-btn").addEventListener("click", toggleExpand);
+
+    discoverAssets().then(function (assets) {
+      CONFIG.assets = assets;
+      readHash();
+      renderGallery();
+    }).catch(function () {
+      document.getElementById("gallery").innerHTML =
+        '<p style="color:#888;padding:2rem">Could not load assets. Make sure the server has directory listing enabled for <code>_assets/</code>.</p>';
+    });
   }
 
   function toggleExpand() {

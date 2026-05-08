@@ -1,7 +1,6 @@
 #!/bin/bash
-# Scans a client folder's _assets/ directory and prints a JS array of filenames.
+# Scans a client folder's _assets/ directory and writes _assets/manifest.json.
 # Usage: ./scan-assets.sh r1
-#   Output can be pasted into the CONFIG.assets array in index.html.
 
 if [ -z "$1" ]; then
   echo "Usage: $0 <client-folder>"
@@ -15,8 +14,9 @@ if [ ! -d "$ASSETS_DIR" ]; then
   exit 1
 fi
 
-echo "["
-ls "$ASSETS_DIR" | sort -t_ -k2 -n | while IFS= read -r file; do
-  echo "  \"$file\","
-done
-echo "]"
+# Write manifest.json using python3 for proper JSON encoding
+ls "$ASSETS_DIR" | sort -t_ -k2 -n | grep -v "^manifest\.json$" | \
+  python3 -c "import sys, json; print(json.dumps(sys.stdin.read().splitlines(), indent=2))" \
+  > "$ASSETS_DIR/manifest.json"
+
+echo "✓ Written: $ASSETS_DIR/manifest.json"

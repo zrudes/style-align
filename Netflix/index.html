@@ -11,7 +11,7 @@
   <script>
     const CONFIG = {
       description: "Scroll down this page and review the images. Select 2–5 that you really love; and 1–4 that you really dislike/hate. We're looking for strong reactions, no lukewarm feelings! Your choices should be made based on your personal aesthetic alone — don't worry about how this relates to your organization's needs.",
-      email: "info@fix.studio",
+      formspreeId: "xqenybbz",
       assets: []
     };
   </script>
@@ -70,6 +70,21 @@
       </div>
     </div>
     <div id="panel-expanded-view"></div>
+  </div>
+
+  <div id="submit-modal" class="modal-hidden">
+    <div id="submit-backdrop"></div>
+    <div id="submit-card">
+      <button id="submit-close" type="button" aria-label="Close">&times;</button>
+      <h2>Submit Selections</h2>
+      <form id="submit-form">
+        <label for="submit-name">Name</label>
+        <input id="submit-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
+        <label for="submit-email">Email</label>
+        <input id="submit-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+        <button id="submit-send" type="submit">Send</button>
+      </form>
+    </div>
   </div>
 
   <script src="../app.js"></script>

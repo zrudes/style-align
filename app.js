@@ -74,7 +74,10 @@
     document.getElementById("client-name").textContent = CLIENT_NAME;
     document.getElementById("description").textContent = CONFIG.description;
 
-    document.getElementById("btn-submit").addEventListener("click", submitMailto);
+    document.getElementById("btn-submit").addEventListener("click", openSubmitModal);
+    document.getElementById("submit-close").addEventListener("click", closeSubmitModal);
+    document.getElementById("submit-backdrop").addEventListener("click", closeSubmitModal);
+    document.getElementById("submit-form").addEventListener("submit", handleFormSubmit);
     document.getElementById("btn-copy").addEventListener("click", copyURL);
     document.getElementById("btn-download").addEventListener("click", downloadZip);
     document.getElementById("panel-expand-btn").addEventListener("click", toggleExpand);
@@ -436,40 +439,62 @@
     return base + "_assets/";
   }
 
-  function submitMailto() {
+  function openSubmitModal() {
+    document.getElementById("submit-modal").classList.remove("modal-hidden");
+  }
+
+  function closeSubmitModal() {
+    document.getElementById("submit-modal").classList.add("modal-hidden");
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+
+    var nameVal = document.getElementById("submit-name").value.trim();
+    var emailVal = document.getElementById("submit-email").value.trim();
+    if (!nameVal || !emailVal) return;
+
     var lists = getSelectionLists();
-    var subject = CLIENT_NAME + " Style Align Submission";
     var baseURL = getAssetBaseURL();
+    var sendBtn = document.getElementById("submit-send");
 
-    var body = "Review URL:\n" + window.location.href + "\n\n";
+    var message = "Review URL: " + window.location.href + "\n\n";
+    message += "LOVE (" + lists.loved.length + "):\n";
+    lists.loved.forEach(function (f) { message += "  " + f + " — " + baseURL + f + "\n"; });
+    if (!lists.loved.length) message += "  (none)\n";
+    message += "\nHATE (" + lists.hated.length + "):\n";
+    lists.hated.forEach(function (f) { message += "  " + f + " — " + baseURL + f + "\n"; });
+    if (!lists.hated.length) message += "  (none)\n";
 
-    body += "━━━  LOVE (" + lists.loved.length + ")  ━━━\n\n";
-    if (lists.loved.length) {
-      lists.loved.forEach(function (f) {
-        body += f + "\n" + baseURL + f + "\n\n";
-      });
-    } else {
-      body += "(none)\n\n";
-    }
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Sending…";
 
-    body += "━━━  HATE (" + lists.hated.length + ")  ━━━\n\n";
-    if (lists.hated.length) {
-      lists.hated.forEach(function (f) {
-        body += f + "\n" + baseURL + f + "\n\n";
-      });
-    } else {
-      body += "(none)\n\n";
-    }
-
-    var mailto =
-      "mailto:" +
-      encodeURIComponent(CONFIG.email) +
-      "?subject=" +
-      encodeURIComponent(subject) +
-      "&body=" +
-      encodeURIComponent(body);
-
-    window.location.href = mailto;
+    fetch("https://formspree.io/f/" + CONFIG.formspreeId, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        name: nameVal,
+        email: emailVal,
+        _subject: CLIENT_NAME + " Style Align Submission",
+        client: CLIENT_NAME,
+        loved: lists.loved.join(", "),
+        hated: lists.hated.join(", "),
+        message: message
+      })
+    })
+    .then(function (r) {
+      if (!r.ok) throw new Error("submit failed");
+      closeSubmitModal();
+      document.getElementById("submit-form").reset();
+      showToast("Submitted! Thanks, " + nameVal + ".");
+    })
+    .catch(function () {
+      showToast("Something went wrong. Please try again.");
+    })
+    .then(function () {
+      sendBtn.disabled = false;
+      sendBtn.textContent = "Send";
+    });
   }
 
   function copyURL() {

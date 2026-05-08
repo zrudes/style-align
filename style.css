@@ -659,3 +659,104 @@
       stroke-linecap: round;
     }
   }
+
+/* ── Submit Modal ── */
+
+#submit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#submit-modal.modal-hidden {
+  display: none;
+}
+
+#submit-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+#submit-card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: calc(100% - 32px);
+  max-width: 380px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+#submit-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+}
+
+#submit-close:hover {
+  color: #121212;
+}
+
+#submit-card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+#submit-form label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+#submit-form input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#submit-form input:focus {
+  border-color: #121212;
+}
+
+#submit-send {
+  width: 100%;
+  padding: 0.65rem;
+  border: none;
+  border-radius: 999px;
+  background: #121212;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.25rem;
+  transition: opacity 0.15s;
+}
+
+#submit-send:hover {
+  opacity: 0.85;
+}
+
+#submit-send:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

@@ -362,7 +362,34 @@
     border-left: 1px solid #1c1c1c;
   }
 
-  /* Icon-only copy button */
+  /* Icon-only action buttons */
+  #btn-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    background: #161616;
+    color: #888;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+
+  #btn-download svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  #btn-download:hover {
+    background: #1e1e1e;
+    border-color: #444;
+    color: #ccc;
+  }
+
   #btn-copy {
     display: flex;
     align-items: center;
@@ -499,6 +526,10 @@
       gap: 0.4rem;
     }
 
+    #btn-download {
+      display: none;
+    }
+
     #btn-copy {
       width: 34px;
       height: 34px;
@@ -535,7 +566,6 @@
     #panel-expand-btn svg {
       width: 16px;
       height: 16px;
-      transition: transform 0.25s ease;
     }
 
     #panel-expand-btn:hover {
@@ -543,8 +573,12 @@
       border-color: #444;
     }
 
-    .panel-expanded #panel-expand-btn svg {
-      transform: rotate(180deg);
+    .panel-expanded #panel-expand-btn .icon-edit {
+      display: none !important;
+    }
+
+    .panel-expanded #panel-expand-btn .icon-caret {
+      display: block !important;
     }
 
     /* Expanded view */

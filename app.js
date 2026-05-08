@@ -25,6 +25,7 @@
 
     document.getElementById("btn-submit").addEventListener("click", submitMailto);
     document.getElementById("btn-copy").addEventListener("click", copyURL);
+    document.getElementById("btn-download").addEventListener("click", downloadZip);
     document.getElementById("panel-expand-btn").addEventListener("click", toggleExpand);
   }
 
@@ -424,6 +425,71 @@
         iconCheck.style.display = "none";
         btn.classList.remove("copied");
       }, 2000);
+    });
+  }
+
+  // ── Download ZIP ──
+
+  function loadJSZip() {
+    return new Promise(function (resolve, reject) {
+      if (window.JSZip) return resolve(window.JSZip);
+      var script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
+      script.onload = function () { resolve(window.JSZip); };
+      script.onerror = function () { reject(new Error("Failed to load JSZip")); };
+      document.head.appendChild(script);
+    });
+  }
+
+  function downloadZip() {
+    var lists = getSelectionLists();
+    if (lists.loved.length === 0 && lists.hated.length === 0) {
+      showToast("Make some selections first");
+      return;
+    }
+
+    var btn = document.getElementById("btn-download");
+    btn.style.pointerEvents = "none";
+    btn.style.opacity = "0.4";
+
+    loadJSZip().then(function (JSZip) {
+      var zip = new JSZip();
+      var loveFolder = zip.folder("love");
+      var hateFolder = zip.folder("hate");
+      var fetches = [];
+
+      lists.loved.forEach(function (filename) {
+        fetches.push(
+          fetch("_assets/" + filename)
+            .then(function (r) { return r.blob(); })
+            .then(function (blob) { loveFolder.file(filename, blob); })
+        );
+      });
+
+      lists.hated.forEach(function (filename) {
+        fetches.push(
+          fetch("_assets/" + filename)
+            .then(function (r) { return r.blob(); })
+            .then(function (blob) { hateFolder.file(filename, blob); })
+        );
+      });
+
+      return Promise.all(fetches).then(function () {
+        return zip.generateAsync({ type: "blob" });
+      });
+    }).then(function (content) {
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(content);
+      a.download = CLIENT_NAME + "_style_align.zip";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    }).catch(function () {
+      showToast("Download failed — try again");
+    }).finally(function () {
+      btn.style.pointerEvents = "";
+      btn.style.opacity = "";
     });
   }
 

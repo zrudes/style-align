@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Partner Outing | Friday, May 22</title>
+    <meta
+      name="description"
+      content="A refined single-page itinerary for a private partner outing in New York City."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f5f0e8;
+        --paper-deep: #ebe4d9;
+        --ink: #1f1d19;
+        --muted: #70695f;
+        --line: rgba(31, 29, 25, 0.16);
+        --line-strong: rgba(31, 29, 25, 0.28);
+        --accent: #8b6f4f;
+        --charcoal: #141310;
+        --white: #fffaf2;
+        --serif: "Newsreader", Georgia, serif;
+        --sans: "Inter", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background: var(--paper);
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.65;
+        letter-spacing: 0;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .site-nav {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 20px clamp(20px, 4vw, 56px);
+        color: var(--white);
+        transition:
+          background 360ms ease,
+          color 360ms ease,
+          border-color 360ms ease,
+          padding 360ms ease;
+      }
+
+      .site-nav.is-scrolled {
+        padding-block: 14px;
+        color: var(--ink);
+        background: rgba(245, 240, 232, 0.86);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(18px);
+      }
+
+      .brand {
+        font-family: var(--serif);
+        font-size: 18px;
+        font-weight: 400;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: clamp(14px, 2vw, 28px);
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .nav-links a {
+        position: relative;
+        text-decoration: none;
+        opacity: 0.78;
+        transition: opacity 220ms ease;
+      }
+
+      .nav-links a::after {
+        position: absolute;
+        right: 0;
+        bottom: -7px;
+        left: 0;
+        height: 1px;
+        background: currentColor;
+        content: "";
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 260ms ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        opacity: 1;
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a:focus-visible::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        display: grid;
+        align-items: end;
+        overflow: clip;
+        color: var(--white);
+        isolation: isolate;
+      }
+
+      .hero::before {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background-image:
+          linear-gradient(
+            180deg,
+            rgba(20, 19, 16, 0.22) 0%,
+            rgba(20, 19, 16, 0.44) 54%,
+            rgba(20, 19, 16, 0.72) 100%
+          ),
+          url("https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=2400&q=82");
+        background-position: center;
+        background-size: cover;
+        content: "";
+        transform: scale(1.03);
+        animation: settle 1400ms ease forwards;
+      }
+
+      .hero-inner {
+        width: min(100%, 1440px);
+        margin: 0 auto;
+        padding: 18vh clamp(22px, 6vw, 96px) 11vh;
+      }
+
+      .eyebrow {
+        margin: 0 0 22px;
+        color: currentColor;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        opacity: 0.76;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 900px;
+        margin-bottom: 14px;
+        font-family: var(--serif);
+        font-size: clamp(72px, 13vw, 184px);
+        font-weight: 300;
+        line-height: 0.88;
+      }
+
+      .hero-date {
+        margin-bottom: clamp(34px, 6vw, 70px);
+        font-family: var(--serif);
+        font-size: clamp(30px, 4vw, 58px);
+        font-weight: 300;
+        line-height: 1.05;
+      }
+
+      .hero-copy {
+        max-width: 620px;
+        margin-left: auto;
+        font-family: var(--serif);
+        font-size: clamp(22px, 2.5vw, 34px);
+        font-weight: 300;
+        line-height: 1.25;
+      }
+
+      .section {
+        padding: clamp(80px, 11vw, 160px) clamp(22px, 5vw, 72px);
+      }
+
+      .section-inner {
+        width: min(100%, 1220px);
+        margin: 0 auto;
+      }
+
+      .intro-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(280px, 1.15fr);
+        gap: clamp(40px, 8vw, 120px);
+        align-items: start;
+      }
+
+      .section-kicker {
+        margin-bottom: 16px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+
+      h2 {
+        max-width: 720px;
+        font-family: var(--serif);
+        font-size: clamp(44px, 7vw, 96px);
+        font-weight: 300;
+        line-height: 0.96;
+      }
+
+      .intro-copy {
+        max-width: 620px;
+        margin-top: 12px;
+        color: var(--muted);
+        font-family: var(--serif);
+        font-size: clamp(21px, 2.4vw, 32px);
+        font-weight: 300;
+        line-height: 1.32;
+      }
+
+      .timeline {
+        margin-top: clamp(72px, 10vw, 140px);
+        border-top: 1px solid var(--line-strong);
+      }
+
+      .stop {
+        display: grid;
+        grid-template-columns: minmax(170px, 0.34fr) minmax(0, 0.82fr) minmax(320px, 0.84fr);
+        gap: clamp(28px, 5vw, 72px);
+        padding: clamp(56px, 8vw, 104px) 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .stop-meta {
+        position: sticky;
+        top: 96px;
+        align-self: start;
+      }
+
+      .stop-number {
+        display: block;
+        margin-bottom: 24px;
+        color: var(--accent);
+        font-family: var(--serif);
+        font-size: 42px;
+        font-weight: 300;
+      }
+
+      .time {
+        margin-bottom: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      address {
+        max-width: 190px;
+        color: var(--muted);
+        font-style: normal;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      h3 {
+        margin-bottom: 24px;
+        font-family: var(--serif);
+        font-size: clamp(42px, 5vw, 76px);
+        font-weight: 300;
+        line-height: 0.98;
+      }
+
+      .stop-text p {
+        max-width: 560px;
+        color: var(--muted);
+        font-family: var(--serif);
+        font-size: clamp(20px, 2vw, 27px);
+        font-weight: 300;
+        line-height: 1.38;
+      }
+
+      .distinction {
+        display: inline-flex;
+        margin: 16px 0 32px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line-strong);
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      .map-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 18px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 600;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.13em;
+        transition:
+          background 260ms ease,
+          color 260ms ease,
+          border-color 260ms ease,
+          transform 260ms ease;
+      }
+
+      .map-link::after {
+        content: "\2197";
+        font-size: 13px;
+        line-height: 1;
+      }
+
+      .map-link:hover,
+      .map-link:focus-visible {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: var(--paper);
+        transform: translateY(-2px);
+      }
+
+      .image-panel {
+        min-height: 520px;
+        overflow: hidden;
+        background: var(--paper-deep);
+      }
+
+      .image-panel img {
+        filter: saturate(0.86) contrast(1.03);
+        transition: transform 900ms ease, filter 900ms ease;
+      }
+
+      .stop:hover .image-panel img {
+        filter: saturate(0.96) contrast(1.05);
+        transform: scale(1.035);
+      }
+
+      .full-bleed {
+        min-height: 76vh;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(20, 19, 16, 0.04),
+            rgba(20, 19, 16, 0.3)
+          ),
+          url("https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=2400&q=82");
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .closing {
+        display: grid;
+        min-height: 72vh;
+        place-items: center;
+        padding: clamp(90px, 12vw, 180px) clamp(22px, 5vw, 72px);
+        text-align: center;
+      }
+
+      .closing p {
+        max-width: 820px;
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(42px, 7vw, 98px);
+        font-weight: 300;
+        line-height: 1.02;
+      }
+
+      .closing span {
+        display: block;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 28px clamp(22px, 5vw, 72px);
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 850ms ease,
+          transform 850ms ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes settle {
+        to {
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 980px) {
+        .intro-grid,
+        .stop {
+          grid-template-columns: 1fr;
+        }
+
+        .stop {
+          gap: 28px;
+        }
+
+        .stop-meta {
+          position: static;
+          display: grid;
+          grid-template-columns: auto minmax(0, 1fr);
+          gap: 8px 24px;
+          align-items: start;
+        }
+
+        .stop-number {
+          grid-row: span 2;
+          margin: 0;
+        }
+
+        address {
+          max-width: none;
+        }
+
+        .image-panel {
+          min-height: min(76vw, 560px);
+        }
+
+        .full-bleed {
+          background-attachment: scroll;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .site-nav {
+          align-items: flex-start;
+          padding: 16px 18px;
+        }
+
+        .nav-links {
+          gap: 12px;
+          font-size: 10px;
+        }
+
+        .nav-links a:nth-child(2) {
+          display: none;
+        }
+
+        .hero-inner {
+          padding: 30vh 22px 72px;
+        }
+
+        h1 {
+          font-size: clamp(64px, 21vw, 112px);
+        }
+
+        .hero-copy {
+          margin-left: 0;
+        }
+
+        .section {
+          padding-inline: 22px;
+        }
+
+        .stop-number {
+          font-size: 34px;
+        }
+
+        .image-panel {
+          min-height: 420px;
+        }
+
+        footer {
+          display: grid;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Partner Outing home">Partner Outing</a>
+      <div class="nav-links" aria-label="Page sections">
+        <a href="#itinerary">Itinerary</a>
+        <a href="#pause">The Pause</a>
+        <a href="#closing">Close</a>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="hero" aria-label="Partner Outing">
+        <div class="hero-inner">
+          <p class="eyebrow reveal">Private New York City Itinerary</p>
+          <h1 class="reveal">Partner Outing</h1>
+          <p class="hero-date reveal">Friday, May 22</p>
+          <p class="hero-copy reveal">
+            A brief pause from the pace. Good food, good conversation and a reminder
+            that the work affords moments like these.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="itinerary" aria-labelledby="itinerary-title">
+        <div class="section-inner">
+          <div class="intro-grid">
+            <div class="reveal">
+              <p class="section-kicker">The Day</p>
+              <h2 id="itinerary-title">Three stops, deliberately paced.</h2>
+            </div>
+            <p class="intro-copy reveal">
+              Lunch uptown, a reset across the river, then a softer edge to the
+              evening above Williamsburg. The point is not to optimize the day. It
+              is to inhabit it.
+            </p>
+          </div>
+
+          <div class="timeline">
+            <article class="stop reveal">
+              <div class="stop-meta">
+                <span class="stop-number">01</span>
+                <div class="time">12:30 PM</div>
+                <address>1 Central Park West<br />New York, NY 10023</address>
+              </div>
+              <div class="stop-text">
+                <h3>Jean-Georges</h3>
+                <p>
+                  A long Friday lunch in Manhattan, measured in courses rather than
+                  minutes. Jean-Georges brings the quiet ceremony of fine dining to
+                  the edge of Central Park: precise service, seasonal cooking and
+                  the particular ease that arrives when the calendar finally gives
+                  way.
+                </p>
+                <span class="distinction">Two Michelin Stars</span>
+                <br />
+                <a
+                  class="map-link"
+                  href="https://www.google.com/maps/search/?api=1&query=Jean-Georges%201%20Central%20Park%20West%20New%20York%20NY%2010023"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Open in Maps</a>
+              </div>
+              <figure class="image-panel" aria-label="Jean-Georges dining room">
+                <img
+                  src="https://www.jean-georgesrestaurant.com/content/slides/jg-restaurant2.jpg"
+                  alt="Elegant dining room at Jean-Georges in New York"
+                />
+              </figure>
+            </article>
+
+            <article class="stop reveal">
+              <div class="stop-meta">
+                <span class="stop-number">02</span>
+                <div class="time">4:00 PM</div>
+                <address>103 N 10th St<br />Brooklyn, NY 11249</address>
+              </div>
+              <div class="stop-text">
+                <h3>Bathhouse Williamsburg</h3>
+                <p>
+                  The decompression chapter. Heat, cold, stillness and the useful
+                  silence that follows a long run of weeks. Inside the old brick
+                  volume, the day moves from conversation to reset: sauna, plunge,
+                  breath, repeat.
+                </p>
+                <a
+                  class="map-link"
+                  href="https://www.google.com/maps/search/?api=1&query=Bathhouse%20Williamsburg%20103%20N%2010th%20St%20Brooklyn%20NY%2011249"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Open in Maps</a>
+              </div>
+              <figure class="image-panel" aria-label="Bathhouse Williamsburg pools">
+                <img
+                  src="https://images.squarespace-cdn.com/content/v1/5ad3c6ef9772aeee6dabd229/1610825254922-KYTNA2CUN5SO3IDSPTR1/Copy%2Bof%2BBATHHOUSE_Pools%2B02_Adrian%2BGaut.jpg"
+                  alt="Thermal pools inside Bathhouse Williamsburg"
+                />
+              </figure>
+            </article>
+
+            <article class="stop reveal">
+              <div class="stop-meta">
+                <span class="stop-number">03</span>
+                <div class="time">7:00 PM</div>
+                <address>97 Wythe Ave<br />Brooklyn, NY 11249</address>
+              </div>
+              <div class="stop-text">
+                <h3>The Hoxton Williamsburg</h3>
+                <p>
+                  A soft landing to the evening: rooftop drinks, room for the day
+                  to loosen, and enough atmosphere to stay as long as the table
+                  wants. No hard stop, no forced cadence, just the city settling
+                  into its better light.
+                </p>
+                <a
+                  class="map-link"
+                  href="https://www.google.com/maps/search/?api=1&query=The%20Hoxton%20Williamsburg%2097%20Wythe%20Ave%20Brooklyn%20NY%2011249"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Open in Maps</a>
+              </div>
+              <figure class="image-panel" aria-label="The Hoxton Williamsburg rooftop bar">
+                <img
+                  src="https://thehoxton.com/wp-content/uploads/sites/5/2021/12/220413_LaserWolf_BK_-0022-1.jpg?w=1200"
+                  alt="Rooftop bar seating at Laser Wolf inside The Hoxton Williamsburg"
+                />
+              </figure>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="full-bleed" id="pause" aria-label="New York evening skyline"></section>
+
+      <section class="closing" id="closing" aria-label="Closing note">
+        <p class="reveal">
+          <span>No agenda. No presentations. No deliverables.</span>
+          <span>Just a good day.</span>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Friday, May 22</span>
+      <span>New York City</span>
+    </footer>
+
+    <script>
+      const nav = document.querySelector(".site-nav");
+      const revealEls = document.querySelectorAll(".reveal");
+
+      const setNavState = () => {
+        nav.classList.toggle("is-scrolled", window.scrollY > 24);
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+      );
+
+      revealEls.forEach((el, index) => {
+        el.style.transitionDelay = `${Math.min(index * 70, 260)}ms`;
+        observer.observe(el);
+      });
+
+      setNavState();
+      window.addEventListener("scroll", setNavState, { passive: true });
+    </script>
+  </body>
+</html>

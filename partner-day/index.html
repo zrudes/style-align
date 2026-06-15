@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Partner Outing | Friday, May 22</title>
+    <title>Partner Outing | Sunday, June 21</title>
     <meta
       name="description"
       content="A refined single-page itinerary for a private partner outing in New York City."
@@ -17,9 +17,9 @@
     <style>
       :root {
         --paper: #f5f0e8;
-        --paper-deep: #ebe4d9;
+        --paper-deep: #e9e0d3;
         --ink: #1f1d19;
-        --muted: #70695f;
+        --muted: #716a60;
         --line: rgba(31, 29, 25, 0.16);
         --line-strong: rgba(31, 29, 25, 0.28);
         --accent: #8b6f4f;
@@ -149,11 +149,11 @@
         background-image:
           linear-gradient(
             180deg,
-            rgba(20, 19, 16, 0.22) 0%,
-            rgba(20, 19, 16, 0.44) 54%,
-            rgba(20, 19, 16, 0.72) 100%
+            rgba(20, 19, 16, 0.14) 0%,
+            rgba(20, 19, 16, 0.4) 54%,
+            rgba(20, 19, 16, 0.76) 100%
           ),
-          url("https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=2400&q=82");
+          url("https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=2400&q=82");
         background-position: center;
         background-size: cover;
         content: "";
@@ -202,7 +202,7 @@
       }
 
       .hero-copy {
-        max-width: 620px;
+        max-width: 660px;
         margin-left: auto;
         font-family: var(--serif);
         font-size: clamp(22px, 2.5vw, 34px);
@@ -236,7 +236,7 @@
       }
 
       h2 {
-        max-width: 720px;
+        max-width: 760px;
         font-family: var(--serif);
         font-size: clamp(44px, 7vw, 96px);
         font-weight: 300;
@@ -244,7 +244,7 @@
       }
 
       .intro-copy {
-        max-width: 620px;
+        max-width: 640px;
         margin-top: 12px;
         color: var(--muted);
         font-family: var(--serif);
@@ -253,12 +253,47 @@
         line-height: 1.32;
       }
 
+      .day-plan {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: clamp(48px, 6vw, 84px);
+        background: var(--line);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .plan-tile {
+        min-height: 150px;
+        padding: 24px;
+        background: var(--paper);
+      }
+
+      .plan-tile span {
+        display: block;
+        margin-bottom: 18px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      .plan-tile strong {
+        display: block;
+        font-family: var(--serif);
+        font-size: clamp(24px, 2.6vw, 38px);
+        font-weight: 300;
+        line-height: 1;
+      }
+
       .timeline {
         margin-top: clamp(72px, 10vw, 140px);
         border-top: 1px solid var(--line-strong);
       }
 
       .stop {
+        scroll-margin-top: 92px;
         display: grid;
         grid-template-columns: minmax(170px, 0.34fr) minmax(0, 0.82fr) minmax(320px, 0.84fr);
         gap: clamp(28px, 5vw, 72px);
@@ -290,7 +325,7 @@
       }
 
       address {
-        max-width: 190px;
+        max-width: 210px;
         color: var(--muted);
         font-style: normal;
         font-size: 13px;
@@ -306,12 +341,44 @@
       }
 
       .stop-text p {
-        max-width: 560px;
+        max-width: 570px;
         color: var(--muted);
         font-family: var(--serif);
         font-size: clamp(20px, 2vw, 27px);
         font-weight: 300;
         line-height: 1.38;
+      }
+
+      .detail-list {
+        display: grid;
+        gap: 1px;
+        max-width: 560px;
+        margin: 28px 0 32px;
+        background: var(--line);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .detail-row {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 18px;
+        padding: 14px 0;
+        background: var(--paper);
+      }
+
+      .detail-row span {
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.13em;
+      }
+
+      .detail-row strong {
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 500;
       }
 
       .distinction {
@@ -362,12 +429,24 @@
       }
 
       .image-panel {
+        position: relative;
         min-height: 520px;
         overflow: hidden;
         background: var(--paper-deep);
       }
 
+      .image-panel::before {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(135deg, rgba(31, 29, 25, 0.04), rgba(139, 111, 79, 0.16)),
+          var(--paper-deep);
+        content: "";
+      }
+
       .image-panel img {
+        position: relative;
+        z-index: 1;
         filter: saturate(0.86) contrast(1.03);
         transition: transform 900ms ease, filter 900ms ease;
       }
@@ -383,9 +462,9 @@
           linear-gradient(
             180deg,
             rgba(20, 19, 16, 0.04),
-            rgba(20, 19, 16, 0.3)
+            rgba(20, 19, 16, 0.34)
           ),
-          url("https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=2400&q=82");
+          url("https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=2400&q=82");
         background-attachment: fixed;
         background-position: center;
         background-size: cover;
@@ -443,6 +522,12 @@
         }
       }
 
+      @media (max-width: 1060px) {
+        .day-plan {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
       @media (max-width: 980px) {
         .intro-grid,
         .stop {
@@ -486,12 +571,10 @@
         }
 
         .nav-links {
+          flex-wrap: wrap;
+          justify-content: flex-end;
           gap: 12px;
           font-size: 10px;
-        }
-
-        .nav-links a:nth-child(2) {
-          display: none;
         }
 
         .hero-inner {
@@ -510,12 +593,21 @@
           padding-inline: 22px;
         }
 
+        .day-plan {
+          grid-template-columns: 1fr;
+        }
+
         .stop-number {
           font-size: 34px;
         }
 
         .image-panel {
           min-height: 420px;
+        }
+
+        .detail-row {
+          grid-template-columns: 1fr;
+          gap: 4px;
         }
 
         footer {
@@ -544,9 +636,10 @@
     <nav class="site-nav" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Partner Outing home">Partner Outing</a>
       <div class="nav-links" aria-label="Page sections">
-        <a href="#itinerary">Itinerary</a>
-        <a href="#pause">The Pause</a>
-        <a href="#closing">Close</a>
+        <a href="#coffee">Coffee</a>
+        <a href="#bathhouse">Bathhouse</a>
+        <a href="#hoxton">Hoxton</a>
+        <a href="#oiji-mi">Oiji Mi</a>
       </div>
     </nav>
 
@@ -555,10 +648,10 @@
         <div class="hero-inner">
           <p class="eyebrow reveal">Private New York City Itinerary</p>
           <h1 class="reveal">Partner Outing</h1>
-          <p class="hero-date reveal">Friday, May 22</p>
+          <p class="hero-date reveal">Sunday, June 21</p>
           <p class="hero-copy reveal">
-            A brief pause from the pace. Good food, good conversation and a reminder
-            that the work affords moments like these.
+            A brief pause from the pace. Coffee, heat, cold water, rooftop air and
+            a dinner table held without hurry.
           </p>
         </div>
       </section>
@@ -568,62 +661,90 @@
           <div class="intro-grid">
             <div class="reveal">
               <p class="section-kicker">The Day</p>
-              <h2 id="itinerary-title">Three stops, deliberately paced.</h2>
+              <h2 id="itinerary-title">A Sunday with room to exhale.</h2>
             </div>
             <p class="intro-copy reveal">
-              Lunch uptown, a reset across the river, then a softer edge to the
-              evening above Williamsburg. The point is not to optimize the day. It
-              is to inhabit it.
+              Start soft in Williamsburg, disappear into the baths, then let the
+              evening find its shape: a hotel bar, a later table in Manhattan, and
+              no performance required from anyone.
             </p>
           </div>
 
+          <div class="day-plan reveal" aria-label="Sunday summary">
+            <div class="plan-tile">
+              <span>11:00 AM</span>
+              <strong>Coffee and pastries</strong>
+            </div>
+            <div class="plan-tile">
+              <span>12:00 PM</span>
+              <strong>Bathhouse arrival</strong>
+            </div>
+            <div class="plan-tile">
+              <span>4:30 PM</span>
+              <strong>Drinks at Hoxton</strong>
+            </div>
+            <div class="plan-tile">
+              <span>7:30 PM</span>
+              <strong>Oiji Mi prix fixe</strong>
+            </div>
+          </div>
+
           <div class="timeline">
-            <article class="stop reveal">
+            <article class="stop reveal" id="coffee">
               <div class="stop-meta">
                 <span class="stop-number">01</span>
-                <div class="time">12:30 PM</div>
-                <address>1 Central Park West<br />New York, NY 10023</address>
+                <div class="time">11:00 AM</div>
+                <address>69 Grand St<br />Brooklyn, NY 11249</address>
               </div>
               <div class="stop-text">
-                <h3>Jean-Georges</h3>
+                <h3>Devocion</h3>
                 <p>
-                  A long Friday lunch in Manhattan, measured in courses rather than
-                  minutes. Jean-Georges brings the quiet ceremony of fine dining to
-                  the edge of Central Park: precise service, seasonal cooking and
-                  the particular ease that arrives when the calendar finally gives
-                  way.
+                  Coffee first, deliberately. A warm, green pause in Williamsburg
+                  before the day gets immersive: pastries, Colombian coffee and the
+                  quiet luxury of beginning slowly.
                 </p>
-                <span class="distinction">Two Michelin Stars</span>
-                <br />
                 <a
                   class="map-link"
-                  href="https://www.google.com/maps/search/?api=1&query=Jean-Georges%201%20Central%20Park%20West%20New%20York%20NY%2010023"
+                  href="https://www.google.com/maps/search/?api=1&query=Devocion%2069%20Grand%20St%20Brooklyn%20NY%2011249"
                   target="_blank"
                   rel="noopener noreferrer"
                 >Open in Maps</a>
               </div>
-              <figure class="image-panel" aria-label="Jean-Georges dining room">
+              <figure class="image-panel" aria-label="Coffee and pastries">
                 <img
-                  src="https://www.jean-georgesrestaurant.com/content/slides/jg-restaurant2.jpg"
-                  alt="Elegant dining room at Jean-Georges in New York"
+                  src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=82"
+                  alt="Coffee being prepared in a refined cafe"
                 />
               </figure>
             </article>
 
-            <article class="stop reveal">
+            <article class="stop reveal" id="bathhouse">
               <div class="stop-meta">
                 <span class="stop-number">02</span>
-                <div class="time">4:00 PM</div>
+                <div class="time">12:00 PM</div>
                 <address>103 N 10th St<br />Brooklyn, NY 11249</address>
               </div>
               <div class="stop-text">
                 <h3>Bathhouse Williamsburg</h3>
                 <p>
-                  The decompression chapter. Heat, cold, stillness and the useful
-                  silence that follows a long run of weeks. Inside the old brick
-                  volume, the day moves from conversation to reset: sauna, plunge,
-                  breath, repeat.
+                  The long reset: sauna, cold plunge, rooftop pool and massages
+                  after a full run of weeks. Nothing to solve here. Just heat,
+                  water, quiet conversation and a body coming back online.
                 </p>
+                <div class="detail-list" aria-label="Massage schedule">
+                  <div class="detail-row">
+                    <span>1:30 PM</span>
+                    <strong>Full-body massage: Zach</strong>
+                  </div>
+                  <div class="detail-row">
+                    <span>2:30 PM</span>
+                    <strong>Full-body massage: Alejandro and Konstantinos</strong>
+                  </div>
+                  <div class="detail-row">
+                    <span>2:50 PM</span>
+                    <strong>Full-body massage: Ryan</strong>
+                  </div>
+                </div>
                 <a
                   class="map-link"
                   href="https://www.google.com/maps/search/?api=1&query=Bathhouse%20Williamsburg%20103%20N%2010th%20St%20Brooklyn%20NY%2011249"
@@ -639,19 +760,19 @@
               </figure>
             </article>
 
-            <article class="stop reveal">
+            <article class="stop reveal" id="hoxton">
               <div class="stop-meta">
                 <span class="stop-number">03</span>
-                <div class="time">7:00 PM</div>
+                <div class="time">4:30 PM</div>
                 <address>97 Wythe Ave<br />Brooklyn, NY 11249</address>
               </div>
               <div class="stop-text">
                 <h3>The Hoxton Williamsburg</h3>
                 <p>
-                  A soft landing to the evening: rooftop drinks, room for the day
-                  to loosen, and enough atmosphere to stay as long as the table
-                  wants. No hard stop, no forced cadence, just the city settling
-                  into its better light.
+                  A soft landing after the baths. Settle in for drinks, give the
+                  afternoon a little air and let the group decide whether the next
+                  hour is lobby, rooftop or just the pleasure of nowhere urgent to
+                  be.
                 </p>
                 <a
                   class="map-link"
@@ -663,7 +784,38 @@
               <figure class="image-panel" aria-label="The Hoxton Williamsburg rooftop bar">
                 <img
                   src="https://thehoxton.com/wp-content/uploads/sites/5/2021/12/220413_LaserWolf_BK_-0022-1.jpg?w=1200"
-                  alt="Rooftop bar seating at Laser Wolf inside The Hoxton Williamsburg"
+                  alt="Rooftop bar seating at The Hoxton Williamsburg"
+                />
+              </figure>
+            </article>
+
+            <article class="stop reveal" id="oiji-mi">
+              <div class="stop-meta">
+                <span class="stop-number">04</span>
+                <div class="time">7:30 PM</div>
+                <address>17 W 19th St<br />New York, NY 10011</address>
+              </div>
+              <div class="stop-text">
+                <h3>Oiji Mi</h3>
+                <p>
+                  Five courses to close the day: Korean fine dining with polish,
+                  restraint and a room that carries the evening without needing to
+                  announce itself. A proper table, a clean finish.
+                </p>
+                <span class="distinction">Five Course Prix Fixe</span>
+                <br />
+                <a
+                  class="map-link"
+                  href="https://www.google.com/maps/search/?api=1&query=Oiji%20Mi%2017%20W%2019th%20St%20New%20York%20NY%2010011"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Open in Maps</a>
+              </div>
+              <figure class="image-panel" aria-label="Refined Korean dining table">
+                <img
+                  src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=82"
+                  alt="A refined restaurant dining room set for dinner"
+                  loading="lazy"
                 />
               </figure>
             </article>
@@ -671,18 +823,18 @@
         </div>
       </section>
 
-      <section class="full-bleed" id="pause" aria-label="New York evening skyline"></section>
+      <section class="full-bleed" id="reset" aria-label="New York evening skyline"></section>
 
       <section class="closing" id="closing" aria-label="Closing note">
         <p class="reveal">
           <span>No agenda. No presentations. No deliverables.</span>
-          <span>Just a good day.</span>
+          <span>Just a good Sunday.</span>
         </p>
       </section>
     </main>
 
     <footer>
-      <span>Friday, May 22</span>
+      <span>Sunday, June 21</span>
       <span>New York City</span>
     </footer>
 

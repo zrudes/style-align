@@ -1,0 +1,2 @@
+# Keep original images locally; publish optimized web copies.
+_assets/*.png
